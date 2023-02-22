@@ -12,25 +12,25 @@ public class EmailAdministrativo {
         System.out.println("Bem vindo ao seu email administrativo!");
         Scanner sc = new Scanner(System.in);
         try {
-            int Escolha;
+            int escolha;
             System.out.println("Bem vindo!");
             System.out.printf("Para Envio de mensagens 01 \n" +
                     "Para sair 02 \n" +
                     "Escolha:");
-            Escolha = sc.nextInt();
-            switch (Escolha) {
+            escolha = sc.nextInt();
+            switch (escolha) {
                 case 1:
                     String login;
-                    String Password;
-                    String TituloMensagem;
+                    String password;
+                    String tituloMensagem;
                     String email;
-                    String Mensagem;
-                    String MensagemEdit;
+                    String mensagem;
+                    String mensagemEdit;
                     System.out.println("Digite seu login:");
                     sc.nextLine();
                     login = sc.nextLine();
                     System.out.println("Digite sua senha:");
-                    Password = sc.nextLine();
+                    password = sc.nextLine();
                     Properties props = new Properties();
                     props.put("mail.smtp.host", "smtp.gmail.com");
                     props.put("mail.smtp.port", "587");
@@ -39,43 +39,43 @@ public class EmailAdministrativo {
 
                     Session session = Session.getInstance(props, new Authenticator() {
                         protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(login, Password);
+                            return new PasswordAuthentication(login, password);
                         }
                     });
 
                     System.out.printf("Digite o Titulo da sua mensagem:");
                     sc.nextLine();
-                    TituloMensagem = sc.nextLine();
+                    tituloMensagem = sc.nextLine();
                     System.out.printf("Digite o email para enviar:");
                     email = sc.nextLine();
                     System.out.print("Digite a mensagem:");
-                    Mensagem = sc.nextLine();
+                    mensagem = sc.nextLine();
                     System.out.printf("Deseja editar sua mensagem?:");
-                    MensagemEdit = sc.nextLine();
+                    mensagemEdit = sc.nextLine();
                     Message message = new MimeMessage(session);
                     message.setFrom(new InternetAddress(login));
                     message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-                    message.setSubject(TituloMensagem);
-                    message.setText(Mensagem);
+                    message.setSubject(tituloMensagem);
+                    message.setText(mensagem);
                     Transport.send(message);
                     System.out.println("E-mail enviado com sucesso!");
-                    if(MensagemEdit.equals("Sim") || MensagemEdit.equals("sim") || MensagemEdit.equals("SIM")){
+                    if(mensagemEdit.equals("Sim") || mensagemEdit.equals("sim") || mensagemEdit.equals("SIM")){
                         System.out.printf("Reescreva por favor:");
-                        Mensagem = sc.nextLine();
-                        System.out.println("Mensagem enviada para:" + email + ", com o titulo:" + TituloMensagem + "com a seguinte mensagem:" + Mensagem);
+                        mensagem = sc.nextLine();
+                        System.out.println("Mensagem enviada para:" + email + ", com o titulo:" + tituloMensagem + "com a seguinte mensagem:" + mensagem);
                     }else {
                         if (eValido(email)) {
                             String Continuar;
-                            System.out.println("Mensagem enviada para:" + email + ", com o titulo:" + TituloMensagem + "com a seguinte mensagem:" + Mensagem);
+                            System.out.println("Mensagem enviada para:" + email + ", com o titulo:" + tituloMensagem + "com a seguinte mensagem:" + mensagem);
                             System.out.printf("Deseja enviar outro email?: (Sim ou nao)");
                             Continuar = sc.nextLine();
                             if (Continuar.equals("Sim")) {
                                 System.out.println("Digite o Titulo da sua mensagem:");
-                                TituloMensagem = sc.nextLine();
+                                tituloMensagem = sc.nextLine();
                                 System.out.println("Digite o email para enviar:");
                                 email = sc.nextLine();
                                 System.out.print("Digite a mensagem:");
-                                Mensagem = sc.nextLine();
+                                mensagem = sc.nextLine();
                                 sc.close();
                             } else {
                                 System.out.println("Finalizando o programa");
